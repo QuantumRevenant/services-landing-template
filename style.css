@@ -1,0 +1,523 @@
+:root {
+  --color-text: #333333;
+  --color-text-negative: #ffffff;
+  --color-text-btn: var(--color-text-negative);
+  --color-text-btn-hover: var(--color-text);
+
+  --color-bg: #ffffff;
+  --color-bg-alt: #f7f7f7;
+  --color-bg-gray: #f2f2f2;
+  --color-bg-gray-alt: #cccccc;
+
+  --color-primary: #5a67d8;
+  --color-primary-hover: var(--color-bg);
+  --color-primary-hover-alt:#434190;
+
+  --color-secondary: #4a5568;
+  --color-secondary-hover: #2d3748;
+
+  --color-shadow: rgba(0, 0, 0, 0.25);
+
+  --color-wt: #25D366;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+header {
+  background: var(--color-bg-alt);
+  border-bottom: 1px solid var(--color-bg-gray);
+  padding: 1em 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav {
+  display: flex;
+  gap: 1.5em;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: bold;
+}
+
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2.5em;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.logo-img {
+  max-height: 75px;
+  width: auto;
+  display: block;
+}
+
+/* Por defecto, ocultamos el texto si hay imagen */
+.logo-text {
+  display: none;
+}
+
+/* Si no hay logo cargado o falla, mostramos el texto */
+.logo-img[src=""],
+.logo-img:not([src]),
+.logo-img.broken {
+  display: none;
+}
+
+.logo-img[src=""]+.logo-text,
+.logo-img:not([src])+.logo-text,
+.logo-img.broken+.logo-text {
+  display: inline;
+}
+
+/* ====================================
+   HERO - Modo intercambiable (bg o img)
+==================================== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  transition: background-image 0.5s ease-in-out;
+}
+
+/* Oculta ambos por defecto */
+.hero-content,
+.hero-banner-img {
+  display: none;
+}
+
+.hero[data-hero-type="hero"] .hero-banner-wrapper {
+  display: none;
+}
+
+/* Hero con fondo dinámico */
+.hero[data-hero-type="hero"] {
+  padding: 6em 0;
+  text-align: center;
+  color: var(--color-text-negative);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero[data-hero-type="hero"] .hero-content {
+  display: block;
+}
+
+.hero[data-hero-type="hero"] h2 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+.hero[data-hero-type="hero"] p {
+  font-size: 1.2em;
+}
+
+.hero[data-hero-type="hero"] .btn {
+  background-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hero[data-hero-type="hero"] .btn:hover {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.hero[data-hero-type="hero"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+.hero[data-hero-type="hero"] .hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero como banner con imagen */
+.hero[data-hero-type="banner"] {
+  padding: 0;
+}
+
+.hero[data-hero-type="banner"] .hero-banner-wrapper {
+  display: block;
+}
+
+/* Contenedor que define la proporción */
+.hero-banner-wrapper {
+  width: 100%;
+  aspect-ratio: 3/1;
+  /* o 4/1, ajustable */
+  overflow: hidden;
+  max-width: 1905px;
+  margin: 0 auto;
+}
+
+/* Imagen que llena el contenedor */
+.hero-banner-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ====================================
+   Botones
+==================================== */
+.btn,
+button {
+  display: inline-block;
+  padding: 0.75em 2em;
+  background: var(--color-primary);
+  color: var(--color-text-btn);
+  text-decoration: none;
+  border-radius: 30px;
+  margin-top: 1em;
+  transition: background 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.btn:hover,
+button:hover {
+  background: var(--color-primary-hover);
+  color: var(--color-text-btn-hover);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ====================================
+   Secciones
+==================================== */
+section {
+  padding: 1.5em 0;
+}
+
+.servicios {
+  background: var(--color-bg-alt);
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.card {
+  background: var(--color-bg);
+  flex: 1;
+  min-width: 250px;
+  padding: 2em;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* ====================================
+   Nosotros
+==================================== */
+
+.nosotros p {
+  margin-bottom: 1.5em;
+  font-size: 1.05em;
+  line-height: 1.6;
+}
+
+.nosotros strong {
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.nosotros em {
+  font-style: italic;
+  color: var(--color-text);
+}
+
+/* ====================================
+   Contacto
+==================================== */
+#contacto {
+  background: var(--color-bg-gray);
+  padding: 2em 1em;
+}
+
+.contacto .container {
+  display: flex;
+  gap: 2em;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contacto .imagen-contacto {
+  flex: 1;
+  max-width: 500px;
+  height: 100%;
+  /* por defecto, crecerá con el contenido del formulario */
+  display: flex;
+  align-items: stretch;
+}
+
+.contacto .imagen-contacto img {
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
+  object-fit: scale-down;
+  object-position: bottom;
+  /* recorte desde arriba */
+  border-radius: 8px;
+}
+
+.contacto form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+  max-width: 600px;
+  padding: 2em;
+  border-radius: 8px;
+}
+
+.contacto input,
+.contacto textarea {
+  padding: 0.8em;
+  border: 1px solid var(--color-bg-gray-alt);
+  border-radius: 6px;
+  font-size: 1em;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ====================================
+   Redes sociales
+==================================== */
+
+/* #redes-sociales{
+  background-color: var(--color-bg-gray);
+} */
+
+.redes-sociales {
+  text-align: center;
+}
+
+.iconos-redes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2em;
+}
+
+.iconos-redes svg {
+  width: 48px;
+  height: 48px;
+  transition: transform 0.3s ease;
+}
+
+.iconos-redes a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.iconos-redes a:hover {
+  transform: scale(1.15);
+  color: var(--color-text-btn-hover);
+}
+
+/* ====================================
+   Whatsapp
+==================================== */
+.wt {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 1000;
+}
+
+/* Referencia para posicionamiento */
+.wt-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* SVG */
+.wt-icon svg {
+  fill: var(--color-wt);
+  width: 80px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Hover para efecto */
+.wt-icon svg:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.4));
+}
+
+/* Popup oculto inicialmente */
+.popup {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  background-color: var(--color-wt);
+  color: var(--color-text-negative);
+  padding: 8px 16px;
+  border-radius: 40px;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 0 5px var(--color-wt);
+  font-size: 1rem;
+  transition: opacity 0.3s ease, bottom 0.3s ease;
+
+  min-width: 15.5rem;
+  max-width: 25 rem;
+  font-weight: 500;
+  font-style: italic;
+  text-align: center;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Mostrar popup cuando hay hover */
+.wt-icon:hover+.popup,
+.popup:hover {
+  opacity: 1;
+  bottom: 80px;
+  pointer-events: auto;
+}
+
+
+/* ====================================
+   Footer
+==================================== */
+footer {
+  background: var(--color-bg-alt);
+  text-align: center;
+  padding: 2em 0;
+  font-size: 0.9em;
+  color: var(--color-text);
+}
+
+/* ====================================
+   Responsive
+==================================== */
+@media (max-width: 768px) {
+  .header-flex {
+    flex-direction: column;
+    gap: 0.5em;
+    text-align: center;
+  }
+
+  nav {
+    justify-content: center;
+  }
+
+  .logo {
+    max-height: 95px;
+    margin-bottom: 0.5em;
+  }
+
+  .cards {
+    flex-direction: column;
+  }
+
+  .contacto .container {
+    flex-direction: column;
+  }
+
+  .contacto .imagen-contacto {
+    display: none;
+  }
+
+  .contacto form {
+    width: 100%;
+    padding: 1.5em;
+    background: var(--color-bg);
+  }
+
+  .hero[data-hero-type="bg"] h2 {
+    font-size: 1.8em;
+  }
+
+  .hero[data-hero-type="bg"] p {
+    font-size: 1em;
+  }
+
+  .iconos-redes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5em;
+  }
+
+  .iconos-redes svg {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease;
+  }
+
+  .wt-icon svg {
+    transform: scale(1.15);
+    filter: drop-shadow(2px 4px 6px var(--color-shadow));
+  }
+
+  /* Mostrar popup cuando hay hover */
+  .wt-icon:hover+.popup,
+  .popup:hover {
+    opacity: 0;
+    bottom: 70px;
+    pointer-events: none;
+  }
+}
